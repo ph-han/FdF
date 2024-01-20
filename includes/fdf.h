@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_BONUS_H
-# define FDF_BONUS_H
+#ifndef FDF_H
+# define FDF_H
 
 # include <mlx.h>
 # include <unistd.h>
