@@ -22,17 +22,18 @@ void	to_plan(t_fdf *fdf)
 	draw_map(fdf);
 }
 
-void	to_isometric(t_map *map, t_angle *angle)
+void	to_isometric(t_fdf *fdf)
 {
-	int	i;
+	int	i = 0;
 
-	i = 0;
-	init_angle(angle);
-	while (i < (map->height) * (map->width))
-	{
-		rotate_z(map->r_map + i, angle);
-		rotate_x(map->r_map + i, angle);
-		i++;
-	}
-	init_map(map);
+    ft_mapcpy(fdf->map->o_map, fdf->map->r_map, fdf->map->width * fdf->map->height);
+    init_angle(fdf->angle);
+	while (i < (fdf->map->height) * (fdf->map->width)) {
+        rotate_z(fdf->map->r_map + i, fdf->angle);
+        rotate_x(fdf->map->r_map + i, fdf->angle);
+        i++;
+    }
+	init_map(fdf->map);
+    scaling(fdf->map);
+    draw_map(fdf);
 }

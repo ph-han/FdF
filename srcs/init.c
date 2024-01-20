@@ -17,6 +17,11 @@ void	init_fdf(t_fdf *fdf)
 	fdf->map = (t_map *)malloc(sizeof(t_map));
 	fdf->img = (t_img *)malloc(sizeof(t_img));
 	fdf->angle = (t_angle *)malloc(sizeof(t_angle));
+    fdf->mlx = mlx_init();
+    if (fdf->mlx == NULL)
+        ft_perror("MLX error!");
+    fdf.win = mlx_new_window(fdf.mlx, WIDTH, HEIGHT, "FdF");
+    init_img(fdf);
 }
 
 void	init_img(t_fdf *fdf)
@@ -39,3 +44,4 @@ void	init_map(t_map *map)
 	map->move_x = 0;
 	map->move_y = 0;
 }
+

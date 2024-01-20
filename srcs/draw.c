@@ -66,7 +66,6 @@ void	draw_map_row(t_img *img, t_map *map)
 
 void	draw_map(t_fdf *fdf)
 {
-	init_img(fdf);
 	draw_map_column(fdf->img, fdf->map);
 	draw_map_row(fdf->img, fdf->map);
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img->img, 0, 0);

@@ -20,8 +20,18 @@
 # include "get_next_line.h"
 # include "libft.h"
 
-# define HEIGHT 1000
-# define WIDTH 1600
+# define HEIGHT     1000
+# define WIDTH      1600
+
+# define ESC        53
+
+# define LEFT       123
+# define RIGHT      124
+# define DOWN       125
+# define UP         126
+
+# define PLAN       35
+# define ISOMETRIC  34
 
 typedef struct s_img
 {
@@ -84,24 +94,25 @@ void            init_angle(t_angle *angle);
 void            init_map(t_map *map);
 void            init_fdf(t_fdf *fdf);
 void            init_img(t_fdf *fdf);
+void            init_mlx_window(t_fdf *fdf);
 
 // utils
 void            ft_perror(char *e_msg);
 void            ft_mapcpy(t_point *r_map, t_point *o_map, int map_size);
-int                close_win(t_fdf *fdf);
-int                fdf_atoi(char *str);
+int             close_win(t_fdf *fdf);
+int             fdf_atoi(char *str);
 
 // check funcs
-int                is_valid_filename(char *filename);
-int                is_vaild_num(char *data);
-int                is_valid_data(char *data);
+int             is_valid_filename(char *filename);
+int             is_vaild_num(char *data);
+int             is_valid_data(char *data);
 long            check_and_set_color(char *color);
 
 // parse utils funcs
 void            free_split(char **split_line);
-int                get_map_width(char *line);
-int                fdf_strlen(char *s);
-int                ft_find(char *hex, char c);
+int             get_map_width(char *line);
+int             fdf_strlen(char *s);
+int             ft_find(char *hex, char c);
 
 // parse funcs
 void            parse_map(t_map *map, char *filename);
@@ -149,5 +160,10 @@ int             get_r(long color);
 int             get_g(long color);
 int             get_b(long color);
 unsigned int    gradation(long color1, long color2, double cinc);
+
+// hook
+void            set_hooks(t_fdf *fdf);
+int             mouse_hooks(int key_code, int x, int y, t_fdf *fdf);
+int             key_hooks(int key_code, t_fdf *fdf);
 
 #endif

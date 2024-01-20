@@ -15,7 +15,7 @@
 void	ft_perror(char *e_msg)
 {
 	ft_putendl_fd(e_msg, 2);
-	exit(0);
+	exit(1);
 }
 
 int	fdf_atoi(char *str)

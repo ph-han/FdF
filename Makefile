@@ -44,7 +44,8 @@ SRCS = check.c \
        rotate_metrix.c \
        scaling.c \
        utils.c \
-       zoom.c
+       zoom.c \
+       hook.c
 SRCS			:=	$(addprefix $(SRCDIR)/, $(SRCS))
 
 OBJS = $(SRCS:.c=.o)
