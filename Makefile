@@ -13,75 +13,72 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 #-------------------------------------------
 
-NAME = fdf
-NAME_BONUS = fdf_bonus
-INCLUDE = -Iincludes
-LIBFT = -lft
-LIBFT_DIR = ./includes/libft
-GNL_DIR = ./includes/get_next_line
+NAME		= fdf
 
-MLX = -Lmlx -lmlx -framework OpenGL -framework Appkit
-MLX_DIR = ./mlx
+INCLUDE		= -Iincludes -I./lib/mlx -I./lib/get_next_line -I./lib/libft
 
-CC = gcc
+LIBFT_DIR	= ./lib/libft
+LIBFT		= -L$(LIBFT_DIR) -lft
+
+GNL_DIR		= ./lib/get_next_line
+GNL			= -L$(GNL_DIR) -lgnl
+
+MLX_DIR		= ./lib/mlx
+MLX			= -L$(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
+
+CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = main.c rotate_metrix.c scaling.c draw.c line_algo.c \
-	init.c utils.c check.c\
-	parse.c parse_utils.c\
-	projection.c \
-	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
-
-SRCS_BONUS = ./bonus/main_bonus.c ./bonus/rotate_metrix_bonus.c ./bonus/scaling_bonus.c \
-	./bonus/draw_bonus.c ./bonus/line_algo_bonus.c \
-	./bonus/init_bonus.c ./bonus/utils_bonus.c ./bonus/check_bonus.c \
-	./bonus/rotate_map_bonus.c ./bonus/color_bonus.c\
-	./bonus/parse_bonus.c ./bonus/parse_utils_bonus.c \
-	./bonus/projection_bonus.c ./bonus/zoom_bonus.c ./bonus/move_bonus.c \
-	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
+SRCDIR = ./srcs
+SRCS = check.c \
+       color.c \
+       draw.c \
+       init.c \
+       line_algo.c \
+       main.c \
+       move.c \
+       parse.c \
+       parse_utils.c \
+       projection.c \
+       rotate_map.c \
+       rotate_metrix.c \
+       scaling.c \
+       utils.c \
+       zoom.c
+SRCS			:=	$(addprefix $(SRCDIR)/, $(SRCS))
 
 OBJS = $(SRCS:.c=.o)
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-
 %.o: %.c
-	$(CC) $(CFLAG) $(INCLUDE)/libft -Imlx $(INCLUDE) -c $< -o $@
+	@ $(CC) $(CFLAG) $(INCLUDE) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(MAKE) -C $(MLX_DIR)
-	@$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAG) $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
-	@echo $(YELLOW)"                        FDF DONE"$(EOC)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
-
-bonus: $(NAME_BONUS)
-
-$(NAME_BONUS): $(OBJS_BONUS)
-	@rm -f $(NAME)
-	@$(MAKE) -C $(MLX_DIR)
-	@$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAG) $(OBJS_BONUS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
-	@echo $(YELLOW)"                      FDF BONUS DONE"$(EOC)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+	@ $(MAKE) -C $(MLX_DIR)
+	@ echo $(GREEN)"- MLX complete" $(EOC)
+	@ $(MAKE) -C $(LIBFT_DIR)
+	@ echo $(GREEN)"- LIBFT complete" $(EOC)
+	@ $(MAKE) -C $(GNL_DIR)
+	@ echo $(GREEN)"- GNL complete" $(EOC)
+	@ $(CC) $(CFLAG) $(OBJS) $(LIBFT) $(GNL) $(MLX)  -o $(NAME)
+	@ echo $(GREEN)"** FdF complete **" $(EOC)
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(MLX_DIR) clean
-	rm -f $(OBJS) $(OBJS_BONUS) $(SRCS_BN:.c=.o)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
-	@echo $(YELLOW)"                       FDF CLEAN DONE"$(EOC)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+	@ $(MAKE) -C $(GNL_DIR) clean
+	@ echo $(GREEN)"- GNL cleaned" $(EOC)
+	@ $(MAKE) -C $(LIBFT_DIR) clean
+	@echo $(GREEN)"- LIBFT cleaned" $(EOC)
+	@ $(MAKE) -C $(MLX_DIR) clean``
+	@echo $(GREEN)"- MLX cleaned" $(EOC)
+	@ rm -f $(OBJS)
+	@echo $(GREEN)"** FdF clean done **" $(EOC)
 
 fclean: clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	rm -f $(NAME)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
-	@echo $(YELLOW)"                      FDF FCLEAN DONE"$(EOC)
-	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+	@ $(MAKE) -C $(LIBFT_DIR) fclean
+	@ $(MAKE) -C $(GNL_DIR) fclean
+	@ rm -f $(NAME)
+	@ echo $(GREEN)"** FdF fclean done **" $(EOC)
 
 re: fclean all
 

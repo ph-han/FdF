@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 static int	get_width_center(t_map *map)
 {

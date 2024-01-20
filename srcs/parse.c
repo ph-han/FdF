@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 static void	set_coordinate(t_map *map, char **line_split, int x, int y)
 {

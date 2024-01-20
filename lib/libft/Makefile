@@ -28,18 +28,18 @@ endif
 
 
 %.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	@$(CC) $(CFLAG) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rsc $(NAME) $(OBJS)
+	@ar rsc $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJS) $(SRCS_BN:.c=.o)
+	@rm -f $(OBJS) $(SRCS_BN:.c=.o)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
