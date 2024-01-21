@@ -10,8 +10,12 @@
 * Graphic lib : MLX (miniLibX) made by 42 
   
 ### 1. 실행방법
-* MacOs or Linux에서만 가능
-* 작성예정
+  > ⚠️ Apple Mac에서만 사용 가능
+
+1. ```console git clone https://github.com/ph-han/FdF.git ```
+2. ```console cd FdF && make ```
+3. ```./fdf [fdf map file path && you can only input ".fdf" file extension] ```
+   1. example : ```./fdf ./example/42.fdf ```
 
 ### 2. 예제
 * 작성예정
