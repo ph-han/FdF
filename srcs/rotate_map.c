@@ -22,11 +22,10 @@ void	rotate_map_x(t_fdf *fdf, double r)
 	fdf->angle->gamma = r;
 	while (++i < (fdf->map->height) * (fdf->map->width))
 	{
-		rotate_z(fdf->map->r_map + i, fdf->angle);
-		rotate_y(fdf->map->r_map + i, fdf->angle);
-		rotate_x(fdf->map->r_map + i, fdf->angle);
+		rotate_z(fdf->map->transformed_map + i, fdf->angle);
+		rotate_y(fdf->map->transformed_map + i, fdf->angle);
+		rotate_x(fdf->map->transformed_map + i, fdf->angle);
 	}
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
@@ -40,11 +39,10 @@ void	rotate_map_y(t_fdf *fdf, double r)
 	fdf->angle->gamma = r;
 	while (++i < (fdf->map->height) * (fdf->map->width))
 	{
-		rotate_z(fdf->map->r_map + i, fdf->angle);
-		rotate_y(fdf->map->r_map + i, fdf->angle);
-		rotate_x(fdf->map->r_map + i, fdf->angle);
+		rotate_z(fdf->map->transformed_map + i, fdf->angle);
+		rotate_y(fdf->map->transformed_map + i, fdf->angle);
+		rotate_x(fdf->map->transformed_map + i, fdf->angle);
 	}
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
@@ -55,15 +53,7 @@ void	rotate_map_z(t_fdf *fdf, double r)
 	i = -1;
 	fdf->angle->beta = r;
 	while (++i < (fdf->map->height) * (fdf->map->width))
-		rotate_y(fdf->map->r_map + i, fdf->angle);
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
+		rotate_y(fdf->map->transformed_map + i, fdf->angle);
 	draw_map(fdf);
 }
 
-int	auto_rotate(t_fdf *fdf)
-{
-	rotate_map_z(fdf, -0.2);
-	rotate_map_y(fdf, 0.05);
-	rotate_map_x(fdf, -0.05);
-	return (0);
-}

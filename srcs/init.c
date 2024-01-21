@@ -19,8 +19,8 @@ void	init_fdf(t_fdf *fdf)
 	fdf->angle = (t_angle *)malloc(sizeof(t_angle));
     fdf->mlx = mlx_init();
     if (fdf->mlx == NULL)
-        ft_perror("MLX error!");
-    fdf.win = mlx_new_window(fdf.mlx, WIDTH, HEIGHT, "FdF");
+        my_perror("MLX error!");
+    fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "FdF");
     init_img(fdf);
 }
 

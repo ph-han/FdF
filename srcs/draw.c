@@ -33,8 +33,8 @@ void	draw_map_column(t_img *img, t_map *map)
 		i = 0;
 		while (i < map->height - 1)
 		{
-			p1 = map->r_map[j + map->width * i];
-			p2 = map->r_map[j + map->width * (i + 1)];
+			p1 = map->transformed_map[j + map->width * i];
+			p2 = map->transformed_map[j + map->width * (i + 1)];
 			dda(img, map, p1, p2);
 			i++;
 		}
@@ -55,8 +55,8 @@ void	draw_map_row(t_img *img, t_map *map)
 		i = 0;
 		while (i < map->width - 1)
 		{
-			p1 = map->r_map[i + map->width * j];
-			p2 = map->r_map[i + 1 + map->width * j];
+			p1 = map->transformed_map[i + map->width * j];
+			p2 = map->transformed_map[i + 1 + map->width * j];
 			dda(img, map, p1, p2);
 			i++;
 		}
@@ -66,7 +66,8 @@ void	draw_map_row(t_img *img, t_map *map)
 
 void	draw_map(t_fdf *fdf)
 {
+    ft_memset(fdf->img->addr, 0, WIDTH * HEIGHT * (fdf->img->bits_per_pixel / 8));
 	draw_map_column(fdf->img, fdf->map);
 	draw_map_row(fdf->img, fdf->map);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img->img, 0, 0);
+    mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img->img, 0, 0);
 }

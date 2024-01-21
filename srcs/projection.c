@@ -14,7 +14,7 @@
 
 void	to_plan(t_fdf *fdf)
 {
-	ft_mapcpy(fdf->map->o_map, fdf->map->r_map,
+	mapcpy(fdf->map->original_map, fdf->map->transformed_map,
 		fdf->map->width * fdf->map->height);
 	init_map(fdf->map);
 	scaling(fdf->map);
@@ -26,11 +26,11 @@ void	to_isometric(t_fdf *fdf)
 {
 	int	i = 0;
 
-    ft_mapcpy(fdf->map->o_map, fdf->map->r_map, fdf->map->width * fdf->map->height);
+    mapcpy(fdf->map->original_map, fdf->map->transformed_map, fdf->map->width * fdf->map->height);
     init_angle(fdf->angle);
 	while (i < (fdf->map->height) * (fdf->map->width)) {
-        rotate_z(fdf->map->r_map + i, fdf->angle);
-        rotate_x(fdf->map->r_map + i, fdf->angle);
+        rotate_z(fdf->map->transformed_map + i, fdf->angle);
+        rotate_x(fdf->map->transformed_map + i, fdf->angle);
         i++;
     }
 	init_map(fdf->map);

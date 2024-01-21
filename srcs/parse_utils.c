@@ -12,17 +12,16 @@
 
 #include "fdf.h"
 
-int	get_map_width(char *line)
+int	get_line_width(char *line)
 {
 	char	**line_split;
 	int		width;
 
-	if (!line || *line == '\n')
-		ft_perror("Empty File");
 	width = 0;
 	line_split = ft_split(line, ' ');
 	while (line_split[width] && *line_split[width] != '\n')
-		width++;
+        if (is_valid_data(line_split[width++]) == 0)
+            my_perror("Invalid map data!");
 	free_split(line_split);
 	return (width);
 }

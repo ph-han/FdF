@@ -16,7 +16,6 @@ void	zoom_in(t_fdf *fdf)
 {
 	fdf->map->ratio = 1.05;
 	scaling(fdf->map);
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
@@ -24,6 +23,5 @@ void	zoom_out(t_fdf *fdf)
 {
 	fdf->map->ratio = 0.95;
 	scaling(fdf->map);
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }

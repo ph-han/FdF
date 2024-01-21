@@ -11,31 +11,28 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 void	move_left(t_fdf *fdf)
 {
 	fdf->map->move_x += -10;
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
 void	move_right(t_fdf *fdf)
 {
 	fdf->map->move_x += 10;
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
 void	move_up(t_fdf *fdf)
 {
 	fdf->map->move_y += -10;
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
 void	move_down(t_fdf *fdf)
 {
 	fdf->map->move_y += 10;
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }

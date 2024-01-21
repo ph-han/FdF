@@ -27,7 +27,7 @@ MLX_DIR		= ./lib/mlx
 MLX			= -L$(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRCDIR = ./srcs
 SRCS = check.c \

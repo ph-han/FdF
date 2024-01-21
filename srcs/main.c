@@ -17,10 +17,10 @@ int    main(int ac, char *av[])
     t_fdf    fdf;
 
     if (ac != 2)
-        ft_perror("Argument error!");
+        my_perror("Argument error!");
 
     if (!is_valid_filename(av[1]))
-        ft_perror("Invalid filename!");
+        my_perror("Invalid filename!");
 
     init_fdf(&fdf);
     parse_map(fdf.map, av[1]);

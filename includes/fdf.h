@@ -19,6 +19,7 @@
 # include <math.h>
 # include "get_next_line.h"
 # include "libft.h"
+# include <stdio.h>
 
 # define HEIGHT     1000
 # define WIDTH      1600
@@ -32,6 +33,9 @@
 
 # define PLAN       35
 # define ISOMETRIC  34
+
+# define UPMOUSE    5
+# define DOWNMOUSE  4
 
 typedef struct s_img
 {
@@ -64,8 +68,8 @@ typedef struct s_map
     double  ratio;
     int     move_x;
     int     move_y;
-    t_point *o_map;
-    t_point *r_map;
+    t_point *original_map;
+    t_point *transformed_map;
 }    t_map;
 
 typedef struct s_fdf
@@ -97,8 +101,8 @@ void            init_img(t_fdf *fdf);
 void            init_mlx_window(t_fdf *fdf);
 
 // utils
-void            ft_perror(char *e_msg);
-void            ft_mapcpy(t_point *r_map, t_point *o_map, int map_size);
+void            my_perror(char *err_msg);
+void            mapcpy(t_point *src, t_point *obj, int size);
 int             close_win(t_fdf *fdf);
 int             fdf_atoi(char *str);
 
@@ -110,7 +114,7 @@ long            check_and_set_color(char *color);
 
 // parse utils funcs
 void            free_split(char **split_line);
-int             get_map_width(char *line);
+int             get_line_width(char *line);
 int             fdf_strlen(char *s);
 int             ft_find(char *hex, char c);
 
@@ -118,7 +122,7 @@ int             ft_find(char *hex, char c);
 void            parse_map(t_map *map, char *filename);
 
 // projection funcs
-void            to_isometric(t_map *map, t_angle *angle);
+void            to_isometric(t_fdf *fdf);
 void            to_plan(t_fdf *fdf);
 
 // rotate matrix funcs

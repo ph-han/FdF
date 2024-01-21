@@ -12,19 +12,17 @@
 
 #include "fdf.h"
 
-void	ft_perror(char *e_msg)
+void	my_perror(char *err_msg)
 {
-	ft_putendl_fd(e_msg, 2);
+	ft_putendl_fd(err_msg, 2);
 	exit(1);
 }
 
 int	fdf_atoi(char *str)
 {
-	int		sign;
-	long	result;
+	int		sign = 1;
+	long	result = 0;
 
-	sign = 1;
-	result = 0;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
 	if (*str == '-' || *str == '+')
@@ -37,19 +35,18 @@ int	fdf_atoi(char *str)
 	{
 		result = result * 10 + (*str - '0');
 		if ((sign * result) > 10000000 || (sign * result) < -10000000)
-			ft_perror("Data is over 10000000 or -10000000");
+			my_perror("Data is over 10000000 or -10000000");
 		str++;
 	}
 	return ((int)(sign * result));
 }
 
-void	ft_mapcpy(t_point *r_map, t_point *o_map, int map_size)
+void	mapcpy(t_point *src, t_point *obj, int size)
 {
-	int	i;
+	int	i = -1;
 
-	i = -1;
-	while (++i < map_size)
-		o_map[i] = r_map[i];
+	while (++i < size)
+        obj[i] = src[i];
 }
 
 int	close_win(t_fdf *fdf)

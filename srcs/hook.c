@@ -6,9 +6,9 @@
 
 void set_hooks(t_fdf *fdf)
 {
-    mlx_mouse_hook(fdf->win, mouse_hooks, &fdf);
-    mlx_hook(fdf->win, 2, 1L << 0, key_hooks, &fdf);
-    mlx_hook(fdf->win, 17, 1L << 5, close_win, &fdf);
+    mlx_mouse_hook(fdf->win, mouse_hooks, fdf);
+    mlx_hook(fdf->win, 2, 1L << 0, key_hooks, fdf);
+    mlx_hook(fdf->win, 17, 1L << 5, close_win, fdf);
     mlx_loop(fdf->mlx);
 }
 
@@ -16,9 +16,9 @@ int    mouse_hooks(int key_code, int x, int y, t_fdf *fdf)
 {
     (void)x;
     (void)y;
-    if (key_code == 5)
+    if (key_code == UPMOUSE)
         zoom_in(fdf);
-    else if (key_code == 4)
+    else if (key_code == DOWNMOUSE)
         zoom_out(fdf);
     return (0);
 }

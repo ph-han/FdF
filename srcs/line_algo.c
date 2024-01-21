@@ -19,7 +19,7 @@ static int	get_width_center(t_map *map)
 
 	mid_i = map->width / 2;
 	mid_j = map->width * (map->height / 2);
-	return ((WIDTH / 2) - (map->r_map[mid_i + mid_j].x));
+	return ((WIDTH / 2) - (map->transformed_map[mid_i + mid_j].x));
 }
 
 static int	get_height_center(t_map *map)
@@ -29,7 +29,7 @@ static int	get_height_center(t_map *map)
 
 	mid_i = map->width / 2;
 	mid_j = map->width * (map->height / 2);
-	return ((HEIGHT / 2) - (map->r_map[mid_i + mid_j].y));
+	return ((HEIGHT / 2) - (map->transformed_map[mid_i + mid_j].y));
 }
 
 static int	is_over_window(t_map *map, double x, double y)

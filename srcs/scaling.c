@@ -23,9 +23,9 @@ void	scaling(t_map *map)
 		i = 0;
 		while (i < map->width)
 		{
-			map->r_map[i + map->width * j].x *= map->ratio;
-			map->r_map[i + map->width * j].y *= map->ratio;
-			map->r_map[i + map->width * j].z *= map->ratio;
+			map->transformed_map[i + map->width * j].x *= map->ratio;
+			map->transformed_map[i + map->width * j].y *= map->ratio;
+			map->transformed_map[i + map->width * j].z *= map->ratio;
 			i++;
 		}
 		j++;
