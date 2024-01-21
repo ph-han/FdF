@@ -18,7 +18,6 @@ void	to_plan(t_fdf *fdf)
 		fdf->map->width * fdf->map->height);
 	init_map(fdf->map);
 	scaling(fdf->map);
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
@@ -28,6 +27,7 @@ void	to_isometric(t_fdf *fdf)
 
     mapcpy(fdf->map->original_map, fdf->map->transformed_map, fdf->map->width * fdf->map->height);
     init_angle(fdf->angle);
+    printf("alpha: %lf, beta: %lf, gamma: %lf\n", fdf->angle->alpha, fdf->angle->beta, fdf->angle->gamma);
 	while (i < (fdf->map->height) * (fdf->map->width)) {
         rotate_z(fdf->map->transformed_map + i, fdf->angle);
         rotate_x(fdf->map->transformed_map + i, fdf->angle);

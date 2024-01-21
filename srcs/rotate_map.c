@@ -11,13 +11,18 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <string.h>
 
 void	rotate_map_x(t_fdf *fdf, double r)
 {
 	int	i;
+//    char buff[300];
 
 	i = -1;
-	fdf->angle->alpha = -1 * r;
+//    sprintf(buff, "alpha: %lf, beta: %lf, gamma: %lf\n", fdf->angle->alpha, fdf->angle->beta, fdf->angle->gamma);
+//    mlx_string_put(fdf->mlx, fdf->win, 50, 50, 0xfff, buff);
+    printf("alpha: %lf, beta: %lf, gamma: %lf\n", fdf->angle->alpha, fdf->angle->beta, fdf->angle->gamma);
+	fdf->angle->alpha = r;
 	fdf->angle->beta = r;
 	fdf->angle->gamma = r;
 	while (++i < (fdf->map->height) * (fdf->map->width))
