@@ -23,17 +23,36 @@ void	to_plan(t_fdf *fdf)
 
 void	to_isometric(t_fdf *fdf)
 {
-	int	i = 0;
+	int     i = 0;
+    double  prev_x = 0;
+    double  prev_y = 0;
+    double  prev_z = 0;
+    t_angle angle;
 
     mapcpy(fdf->map->original_map, fdf->map->transformed_map, fdf->map->width * fdf->map->height);
     init_angle(fdf->angle);
-    printf("alpha: %lf, beta: %lf, gamma: %lf\n", fdf->angle->alpha, fdf->angle->beta, fdf->angle->gamma);
+    init_map(fdf->map);
+    angle = *(fdf->angle);
 	while (i < (fdf->map->height) * (fdf->map->width)) {
-        rotate_z(fdf->map->transformed_map + i, fdf->angle);
-        rotate_x(fdf->map->transformed_map + i, fdf->angle);
+        prev_x = fdf->map->transformed_map[i].x;
+        prev_y = fdf->map->transformed_map[i].y;
+        prev_z = fdf->map->transformed_map[i].z;
+        fdf->map->transformed_map[i].x = prev_x * cos(angle.gamma) + prev_y * sin(angle.gamma);
+        fdf->map->transformed_map[i].y = cos(angle.alpha) * (prev_x * -sin(angle.gamma) + prev_y * cos(angle.gamma)) - sin(angle.alpha) * prev_z;
+        fdf->map->transformed_map[i].z = sin(angle.alpha) * (prev_x * -sin(angle.gamma) + prev_y * cos(angle.gamma)) + cos(angle.alpha) * prev_z;
         i++;
     }
-	init_map(fdf->map);
+    for (int i = 0; i < 3; i++)
+    {
+        prev_x = fdf->map->axis[i].x;
+        prev_y = fdf->map->axis[i].y;
+        prev_z = fdf->map->axis[i].z;
+        fdf->map->axis[i].x = prev_x * cos(angle.gamma) + prev_y * sin(angle.gamma);
+        fdf->map->axis[i].y = cos(angle.alpha) * (prev_x * -sin(angle.gamma) + prev_y * cos(angle.gamma)) - sin(angle.alpha) * prev_z;
+        fdf->map->axis[i].z = sin(angle.alpha) * (prev_x * -sin(angle.gamma) + prev_y * cos(angle.gamma)) + cos(angle.alpha) * prev_z;
+    }
     scaling(fdf->map);
     draw_map(fdf);
+    if (fdf->map->is_axis_show)
+        draw_axis(fdf);
 }

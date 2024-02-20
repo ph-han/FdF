@@ -35,7 +35,7 @@ void	init_angle(t_angle *angle)
 {
 	angle->alpha = M_PI / 3;
 	angle->beta = M_PI / 6;
-	angle->gamma = M_PI / 4 * -1;
+	angle->gamma = M_PI / 4;
 }
 
 void	init_map(t_map *map)
@@ -43,5 +43,25 @@ void	init_map(t_map *map)
 	map->ratio = HEIGHT / (double)map->height * 0.4;
 	map->move_x = 0;
 	map->move_y = 0;
+    map->is_axis_show = 1;
+    map->original_axis[0].x = -1;
+    map->original_axis[0].y = 0;
+    map->original_axis[0].z = 0;
+    map->original_axis[0].color = 0x00ff0000;
+    map->original_axis[1].x = 0;
+    map->original_axis[1].y = 1;
+    map->original_axis[1].z = 0;
+    map->original_axis[1].color = 0x0000ff00;
+    map->original_axis[2].x = 0;
+    map->original_axis[2].y = 0;
+    map->original_axis[2].z = 1;
+    map->original_axis[2].color = 0x000000ff;
+    for (int i = 0; i < 3; i++)
+    {
+        map->axis[i].x = map->original_axis[i].x;
+        map->axis[i].y = map->original_axis[i].y;
+        map->axis[i].z = map->original_axis[i].z;
+        map->axis[i].color = map->original_axis[i].color;
+    }
 }
 

@@ -32,8 +32,8 @@ static void	set_coordinate(t_map *map, char **line_split, int x, int y)
 		}
 		else
 			point.color = 0x00FFFFFF;
-		point.x = x;
-		point.y = y;
+		point.x = x - (map->width / 2);
+		point.y = y - (map->height / 2);
 		point.z = fdf_atoi(data_split[0]);
 		map->original_map[x++ + map->width * y] = point;
 		free_split(data_split);

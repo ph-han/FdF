@@ -12,35 +12,36 @@
 
 #include "fdf.h"
 
-void	rotate_x(t_point *point, t_angle *angle)
+t_point    normalize(t_point axis)
 {
-	double	prev_y;
-	double	prev_z;
+    t_point normal_vec;
+    int     vec_size = 0;
 
-	prev_y = point->y;
-	prev_z = point->z;
-	(point->y) = prev_y * cos(angle->alpha) - prev_z * sin(angle->alpha);
-	(point->z) = prev_y * sin(angle->alpha) + prev_z * cos(angle->alpha);
+    vec_size = sqrt(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
+    normal_vec.x = axis.x / vec_size;
+    normal_vec.y = axis.y / vec_size;
+    normal_vec.z = axis.z / vec_size;
+
+    return (normal_vec);
 }
 
-void	rotate_y(t_point *point, t_angle *angle)
+void	rotate(t_point *point, double angle, t_point axis)
 {
-	double	prev_x;
-	double	prev_z;
+    double  prev_point[3] = {point->x, point->y, point->z};
+    double  new_point[3] = {0.0, 0.0, 0.0};
+    t_point u = normalize(axis);
 
-	prev_x = point->x;
-	prev_z = point->z;
-	point->x = prev_x * cos(angle->beta) + prev_z * sin(angle->beta);
-	point->z = -1 * prev_x * sin(angle->beta) + prev_z * cos(angle->beta);
-}
+    double  rotate_metrix[3][3] =
+        {
+            {cos(angle) + pow(u.x, 2.0) * (1 - cos(angle)), u.x * u.y * (1 - cos(angle)) - u.z * sin(angle), u.x * u.z * (1 - cos(angle)) + u.y * sin(angle)},
+            {u.x * u.y * (1 - cos(angle)) + u.z * sin(angle), cos(angle) + pow(u.y, 2.0) * (1 - cos(angle)), u.z * u.y * (1 - cos(angle)) - u.x * sin(angle)},
+            {u.x * u.z * (1 - cos(angle)) - u.y * sin(angle), u.z * u.y * (1 - cos(angle)) + u.x * sin(angle), cos(angle) + pow(u.z, 2.0) * (1 - cos(angle))}
+        };
 
-void	rotate_z(t_point *point, t_angle *angle)
-{
-	double	prev_x;
-	double	prev_y;
-
-	prev_x = point->x;
-	prev_y = point->y;
-	point->x = prev_x * cos(angle->gamma) - prev_y * sin(angle->gamma);
-	point->y = prev_x * sin(angle->gamma) + prev_y * cos(angle->gamma);
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            new_point[i] += rotate_metrix[i][j] * prev_point[j];
+    (point->x) = new_point[0];
+	(point->y) = new_point[1];
+	(point->z) = new_point[2];
 }

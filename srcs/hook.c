@@ -51,5 +51,6 @@ int    key_hooks(int key_code, t_fdf *fdf)
         to_isometric(fdf);
     else if (key_code == PLAN)
         to_plan(fdf);
+    draw_axis(fdf);
     return (0);
 }

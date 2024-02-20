@@ -14,56 +14,43 @@
 
 static int	get_width_center(t_map *map)
 {
-	int	mid_i;
-	int	mid_j;
+	const int   mid_x = map->width / 2;
+	const int   mid_y = map->width * (map->height / 2);
 
-	mid_i = map->width / 2;
-	mid_j = map->width * (map->height / 2);
-	return ((WIDTH / 2) - (map->transformed_map[mid_i + mid_j].x));
+    return ((WIDTH - (map->transformed_map[mid_x + mid_y].x)) / 2);
 }
 
 static int	get_height_center(t_map *map)
 {
-	int		mid_i;
-	int		mid_j;
+	const int   mid_x = map->width / 2;
+	const int   mid_y = map->width * (map->height / 2);
 
-	mid_i = map->width / 2;
-	mid_j = map->width * (map->height / 2);
-	return ((HEIGHT / 2) - (map->transformed_map[mid_i + mid_j].y));
-}
-
-static int	is_over_window(t_map *map, double x, double y)
-{
-	return (x + get_width_center(map) + map->move_x > WIDTH \
-		|| x + get_width_center(map) + map->move_x < 0 \
-		|| y + get_height_center(map) + map->move_y > HEIGHT \
-		|| y + get_height_center(map) + map->move_y < 0);
+	return ((HEIGHT - (map->transformed_map[mid_x + mid_y].y)) / 2);
 }
 
 void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 {
 	t_line	line_info;
-	int		i;
+	int		i = -1;
+    int     is_dx_more_big;
 
 	line_info.dx = point2.x - point1.x;
 	line_info.dy = point2.y - point1.y;
-	if (fabs(line_info.dx) > fabs(line_info.dy))
-		line_info.step = fabs(line_info.dx);
-	else
-		line_info.step = fabs(line_info.dy);
+
+    is_dx_more_big = fabs(line_info.dx) > fabs(line_info.dy);
+    line_info.step = is_dx_more_big ? fabs(line_info.dx) : fabs(line_info.dy);
+
 	line_info.xinc = line_info.dx / line_info.step;
 	line_info.yinc = line_info.dy / line_info.step;
-	i = -1;
+
 	while (++i <= line_info.step)
 	{
-		if (fabs(line_info.dx) > fabs(line_info.dy))
-			line_info.cinc = fabs(point2.x - point1.x) / line_info.step;
-		else
-			line_info.cinc = fabs(point2.y - point1.y) / line_info.step;
-		if (!is_over_window(map, point1.x, point1.y))
-			put_pixel(data, point1.x + get_width_center(map) + map->move_x, \
-				point1.y + get_height_center(map) + map->move_y, \
-				gradation(point1.color, point2.color, line_info.cinc));
+        is_dx_more_big = fabs(point2.x - point1.x) > fabs(point2.y - point1.y);
+        line_info.cinc = is_dx_more_big ? fabs(point2.x - point1.x) : fabs(point2.y - point1.y);
+        line_info.cinc /= line_info.step;
+        put_pixel(data, point1.x + get_width_center(map) + map->move_x, \
+            point1.y + get_height_center(map) + map->move_y, \
+            gradation(point1.color, point2.color, line_info.cinc));
 		point1.x += line_info.xinc;
 		point1.y += line_info.yinc;
 	}

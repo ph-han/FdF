@@ -15,50 +15,37 @@
 
 void	rotate_map_x(t_fdf *fdf, double r)
 {
-	int	i;
-//    char buff[300];
+	int	i = -1;
 
-	i = -1;
-//    sprintf(buff, "alpha: %lf, beta: %lf, gamma: %lf\n", fdf->angle->alpha, fdf->angle->beta, fdf->angle->gamma);
-//    mlx_string_put(fdf->mlx, fdf->win, 50, 50, 0xfff, buff);
-    printf("alpha: %lf, beta: %lf, gamma: %lf\n", fdf->angle->alpha, fdf->angle->beta, fdf->angle->gamma);
-	fdf->angle->alpha = r;
-	fdf->angle->beta = r;
-	fdf->angle->gamma = r;
 	while (++i < (fdf->map->height) * (fdf->map->width))
-	{
-		rotate_z(fdf->map->transformed_map + i, fdf->angle);
-		rotate_y(fdf->map->transformed_map + i, fdf->angle);
-		rotate_x(fdf->map->transformed_map + i, fdf->angle);
-	}
+		rotate(fdf->map->transformed_map + i, r, fdf->map->axis[0]);
+    rotate(&(fdf->map->axis[1]), r, fdf->map->axis[0]);
+    rotate(&(fdf->map->axis[2]), r, fdf->map->axis[0]);
+    draw_axis(fdf);
 	draw_map(fdf);
 }
 
 void	rotate_map_y(t_fdf *fdf, double r)
 {
-	int	i;
+    int	i = -1;
 
-	i = -1;
-	fdf->angle->alpha = r;
-	fdf->angle->beta = r;
-	fdf->angle->gamma = r;
-	while (++i < (fdf->map->height) * (fdf->map->width))
-	{
-		rotate_z(fdf->map->transformed_map + i, fdf->angle);
-		rotate_y(fdf->map->transformed_map + i, fdf->angle);
-		rotate_x(fdf->map->transformed_map + i, fdf->angle);
-	}
-	draw_map(fdf);
+    while (++i < (fdf->map->height) * (fdf->map->width))
+        rotate(fdf->map->transformed_map + i, r, fdf->map->axis[1]);
+    rotate(&(fdf->map->axis[0]), r, fdf->map->axis[1]);
+    rotate(&(fdf->map->axis[2]), r, fdf->map->axis[1]);
+    draw_axis(fdf);
+    draw_map(fdf);
 }
 
 void	rotate_map_z(t_fdf *fdf, double r)
 {
-	int	i;
+    int	i = -1;
 
-	i = -1;
-	fdf->angle->beta = r;
-	while (++i < (fdf->map->height) * (fdf->map->width))
-		rotate_y(fdf->map->transformed_map + i, fdf->angle);
-	draw_map(fdf);
+    while (++i < (fdf->map->height) * (fdf->map->width))
+        rotate(fdf->map->transformed_map + i, r, fdf->map->axis[2]);
+    rotate(&(fdf->map->axis[0]), r, fdf->map->axis[2]);
+    rotate(&(fdf->map->axis[1]), r, fdf->map->axis[2]);
+    draw_axis(fdf);
+    draw_map(fdf);
 }
 

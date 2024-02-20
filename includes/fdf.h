@@ -65,9 +65,12 @@ typedef struct s_map
 {
     int     width;
     int     height;
-    double  ratio;
     int     move_x;
     int     move_y;
+    int     is_axis_show;
+    double  ratio;
+    t_point axis[3];
+    t_point original_axis[3];
     t_point *original_map;
     t_point *transformed_map;
 }    t_map;
@@ -126,7 +129,7 @@ void            to_isometric(t_fdf *fdf);
 void            to_plan(t_fdf *fdf);
 
 // rotate matrix funcs
-void            rotate_x(t_point *point, t_angle *angle);
+void            rotate(t_point *point, double angle, t_point axis);
 void            rotate_y(t_point *point, t_angle *angle);
 void            rotate_z(t_point *point, t_angle *angle);
 
@@ -134,7 +137,7 @@ void            rotate_z(t_point *point, t_angle *angle);
 void            rotate_map_x(t_fdf *fdf, double r);
 void            rotate_map_y(t_fdf *fdf, double r);
 void            rotate_map_z(t_fdf *fdf, double r);
-int                auto_rotate(t_fdf *fdf);
+int             auto_rotate(t_fdf *fdf);
 
 // move map
 void            move_left(t_fdf *fdf);
@@ -170,4 +173,7 @@ void            set_hooks(t_fdf *fdf);
 int             mouse_hooks(int key_code, int x, int y, t_fdf *fdf);
 int             key_hooks(int key_code, t_fdf *fdf);
 
+
+// temp
+void    draw_axis(t_fdf *fdf);
 #endif
