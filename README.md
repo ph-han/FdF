@@ -7,22 +7,33 @@
 
 ### 0. 사용 언어/라이브러리
 * lanuage : C
-* Graphic lib : MLX (miniLibX) made by 42 
+* Graphic library : MLX (miniLibX) based on OpenGL Library
   
 ### 1. 실행방법
   > ⚠️ Apple Mac에서만 사용 가능
+```bash
+  # 1. git clone 받기
+  git clone https://github.com/ph-han/FdF.git
+```
+```bash
+  # 2. 폴더 이동후 빌드
+  cd FdF && make
+```
+```bash
+  # 3. 실행
+  # example : ./fdf ./example/42.fdf
+  ./fdf [fdf map file path && you can only input ".fdf" file extension]
+```
 
-1. ```console git clone https://github.com/ph-han/FdF.git ```
-2. ```console cd FdF && make ```
-3. ```./fdf [fdf map file path && you can only input ".fdf" file extension] ```
-   1. example : ```./fdf ./example/42.fdf ```
-
-### 2. 예제
-* 작성예정
+### 2. 실행 에시
+<img width="500" alt="fdf" src="https://github.com/ph-han/FdF/assets/58614643/b05613c7-ad31-4f87-a014-49c98bd30c77">
 
 ### 3. 업데이트 내역
-* ver.1 (2월 예정)
+* ver.1 (6월 예정)
   - 전체적인 코드 리펙토링
   - "구" / "도넛" 형태로 투영
-* ver.0 (now)
+* ver.0.9 (now)
+  - 폴더 구조 변경
+* ver.0 ~ ver.0.8
+  - 자잘한 수정
   - 입력된 맵 등축 투영, 축 회전, 좌표 이동 가능
