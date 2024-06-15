@@ -56,3 +56,8 @@ void	to_isometric(t_fdf *fdf)
     if (fdf->map->is_axis_show)
         draw_axis(fdf);
 }
+
+void to_sphere(t_fdf *fdf)
+{
+    // 구로 보이게 좌표이동 예정
+}
