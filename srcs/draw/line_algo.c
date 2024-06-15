@@ -37,6 +37,7 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 	line_info.dx = point2.x - point1.x;
 	line_info.dy = point2.y - point1.y;
 
+    // 선그리기 수정 예정 : 입력 값이 화면크기를 넘어갔으면 그냥 화면 최대값으로 대체
     is_dx_more_big = fabs(line_info.dx) > WIDTH ? WIDTH : fabs(lin) > fabs(line_info.dy);
     line_info.step = is_dx_more_big ? fabs(line_info.dx) : fabs(line_info.dy);
 
