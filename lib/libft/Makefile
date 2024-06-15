@@ -26,9 +26,18 @@ else
 	OBJS = $(SRCS:.c=.o)
 endif
 
+FILE_TOTAL = $(words $(SRCS))
+COUNTER = 0
 
 %.o: %.c
+	$(eval COUNTER=$(shell echo $$(($(COUNTER) + 1))))
 	@$(CC) $(CFLAG) -c $< -o $@
+	@$(eval PERCENT=$(shell echo $$(($(COUNTER) * 100 / $(FILE_TOTAL)))))
+	@ printf "Compiling $< - $@ ($(PERCENT)%%) ["
+	@ for (( i = 0; i < $(PERCENT) / 10 * 3; i++ )); do \
+		  printf "="; \
+	   done
+	@ printf "] $(PERCENT)%%\r"
 
 all: $(NAME)
 
