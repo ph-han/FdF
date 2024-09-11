@@ -6,7 +6,7 @@
 
 ### 0. 사용 언어/라이브러리
 * lanuage : C
-* library : <a href="https://harm-smits.github.io/42docs/libs/minilibx">MLX (miniLibX)</a> based on OpenGL Library
+* library : <a href="https://harm-smits.github.io/42docs/libs/minilibx">MLX (miniLibX)</a>based on OpenGL Library
   
 ### 1. 실행방법
   > ⚠️ Apple Mac에서만 사용 가능
@@ -30,6 +30,10 @@
 
 ### 3. 키 입력
 
-### A. 추가 할 것들
+### 4. FdF map 양식
++ 직사각형 형태만 가능
++ 
+
+### A. 추가 할 것들
 - 구, 도넛 모양 만들기
 - 곡선 연결해보기
